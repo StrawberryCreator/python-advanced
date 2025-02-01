@@ -1,3 +1,1 @@
-python advanced
 
-python projects 
