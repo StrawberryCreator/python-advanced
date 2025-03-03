@@ -8,6 +8,7 @@ itemCount = 1
 generate = True
 lose = False
 win = False
+speed = 10
 
 paperBag = Actor("paperbag.png")
 paperBag.pos = (300, 300)
@@ -25,12 +26,14 @@ battery = Actor("battery.png")
 battery.pos = (300, 300)
 
 item = [plasticBag, waterBottle, chips, battery]
+cart = []
+animations = []
 
 def draw ():
     global generate
     global win
     global lose
-    screen.clear ()
+    #screen.clear ()
     if win:
         screen.blit ("reduc.png", (0, 0))
         screen.draw.text ("you win", fontsize = 100, color = "dark green", midtop = (300, 100))
@@ -38,7 +41,7 @@ def draw ():
         screen.blit ("reduc.png", (0, 0))
         screen.draw.text ("you lose", fontsize = 100, color = "red", midtop = (300, 100))
     else:
-        screen.blit ("bg.png", (-315, -90))
+        #screen.blit ("bg.png", (-315, -90))
         if itemCount == 1:
             screen.draw.text ("click the paper bag to begin", fontsize = 50, color = "black", midtop = (300, 275))
         if generate:
@@ -47,6 +50,11 @@ def draw ():
 
 
 def itemDraw ():
+    global cart
+    global speed
+    global lose
+    global animation
+    global animations
     cart = []
     for x in range (0, itemCount, 1):
         cart.append (item[r.randint(0,3)])
@@ -57,6 +65,9 @@ def itemDraw ():
         i += 75
         x.pos = (i, 100)
         x.draw ()
+        animation = animate(x, duration = speed, on_finished = lose, y = 300)
+        animations.append (animation)
+        speed -= 1
 
 def on_mouse_down (pos):
     global itemCount
@@ -77,5 +88,8 @@ def on_mouse_down (pos):
                 collide = True
             if not(collide):
                 lose = True
+
+def update ():
+    pass
 
 pg.go ()
