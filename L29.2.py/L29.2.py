@@ -5,6 +5,9 @@ WIDTH = 600
 HEIGHT = 600
 
 itemCount = 1
+generate = True
+lose = False
+win = False
 
 paperBag = Actor("paperbag.png")
 paperBag.pos = (300, 300)
@@ -21,18 +24,27 @@ chips.pos = (300, 300)
 battery = Actor("battery.png")
 battery.pos = (300, 300)
 
-item = [plasticBag, waterBottle, chips, battery, paperBag]
+item = [plasticBag, waterBottle, chips, battery]
 
 def draw ():
-    paperBag.draw ()
-    plasticBag.draw ()
-    waterBottle.draw ()
-    chips.draw ()
-    battery.draw ()
+    global generate
+    global win
+    global lose
     screen.clear ()
-    screen.blit ("bg.png", (-300, -75))
-    screen.draw.text ("click the paper bag to begin")
-    itemDraw ()
+    if win:
+        screen.blit ("reduc.png", (0, 0))
+        screen.draw.text ("you win", fontsize = 100, color = "dark green", midtop = (300, 100))
+    elif lose:
+        screen.blit ("reduc.png", (0, 0))
+        screen.draw.text ("you lose", fontsize = 100, color = "red", midtop = (300, 100))
+    else:
+        screen.blit ("bg.png", (-315, -90))
+        if itemCount == 1:
+            screen.draw.text ("click the paper bag to begin", fontsize = 50, color = "black", midtop = (300, 275))
+        if generate:
+            itemDraw ()
+            generate = False
+
 
 def itemDraw ():
     cart = []
@@ -40,13 +52,30 @@ def itemDraw ():
         cart.append (item[r.randint(0,3)])
     if paperBag not in cart:
         cart [r.randint(0,itemCount-1)] = paperBag
-    i = 250 - itemCount / 2 * 100
+    i = 255 - itemCount / 2 * 75
     for x in cart:
-        i += 100
+        i += 75
         x.pos = (i, 100)
         x.draw ()
 
+def on_mouse_down (pos):
+    global itemCount
+    global generate
+    global win
+    global lose
+    if paperBag.collidepoint (pos):
+        if itemCount == 8:
+            win = True
+        else:
+            itemCount += 1
+        generate = True
+    else:
+        for x in item:
+            collide = False
+            if x.collidepoint (pos):
+                lose = True
+                collide = True
+            if not(collide):
+                lose = True
 
 pg.go ()
-
-#item[r.randint(0,4)].draw ()
