@@ -1,0 +1,10 @@
+What is the capital of the Netherlands?,Zaandam,Amsterdam,Utrecht,Haarlem,2
+What is the chemical symbol for gold?, Au,Ag,Pb,Fe, 1
+How many sides does a hexagon have?, 4,5,6,8, 3
+What is the largest ocean on Earth?, Atlantic Ocean,Indian Ocean,Artic Ocean,Pacific Ocean, 4
+Who painted the Mona Lisa?, Vincent van Gogh,Leaonardo da Vinci,Pablo Picasso,Michelangelo, 3
+What is the chemical formula for water?, H2o,CO2,O2,NaCl, 1
+How many degrees Fahrenheit is 0° Celsius?, 0°F,100°F,-32°F,32°F, 4
+How many hearts does an octopus have?, 8,3,4,1, 2
+How many degrees are in a full circle?, 90°,180°,270°,360°, 4
+Wich fruit is not a true berry but is commonly thought to be one?, strawberry,blueberry,cranberry,huckleberry, 1
